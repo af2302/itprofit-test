@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Modal from './components/Modal/Modal'
+import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: React.FC = () => {
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        document.body.classList.add('modal-open');
+        setModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        document.body.classList.remove('modal-open');
+        setModalOpen(false);
+    }
+
+    return (
+        <div className="app">
+            <FeedbackForm />
+                <div className="button">
+                    <button onClick={handleOpenModal}>Открыть модальное окно</button>
+                </div>
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+        </div>
+    );
 }
 
 export default App;
